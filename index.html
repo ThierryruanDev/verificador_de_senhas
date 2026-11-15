@@ -1,32 +1,374 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f8ff">
+
   <title>Verificador de Força de Senhas</title>
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
+
 <body>
-<header class="topbar"><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.8-3 8.2-7 10-4-1.8-7-5.2-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span>Verificador<small>de senhas</small></span></a><span class="top-note"><i></i>Análise local e privada</span></header>
-<main id="inicio">
-  <section class="hero"><div class="hero-copy"><div class="eyebrow">✳ LABORATÓRIO DE SEGURANÇA DIGITAL</div><h1>Uma senha forte<br>começa com <span>boas escolhas.</span></h1><p>Explore como comprimento e previsibilidade influenciam a segurança. Teste exemplos fictícios e descubra o que torna uma senha mais difícil de adivinhar.</p><div class="hero-points"><span><b>01</b> Digite ou escolha um exemplo</span><span><b>02</b> Veja a análise em tempo real</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-orbit"></div><div class="art-lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3M12 14v3"/></svg><i>✓</i></div><span class="float-tag">🔐 Proteja suas contas</span></div></section>
-  <section class="workspace" aria-label="Ferramenta de análise">
-    <article class="panel input-panel"><div class="panel-heading"><div><span class="section-kicker">ÁREA DE TESTE</span><h2>Experimente uma senha</h2></div><span class="step-number">01</span></div><p class="panel-intro">Use apenas os exemplos fictícios abaixo durante a apresentação.</p>
-      <label class="field-label" for="password">Sua senha de demonstração</label><div class="password-wrap"><span class="field-lock" aria-hidden="true">◈</span><input id="password" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Digite ou selecione um exemplo" aria-describedby="privacy-note"><button class="icon-button" id="toggle-visibility" type="button" aria-label="Mostrar senha" title="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/></svg></button><button class="icon-button" id="clear-password" type="button" aria-label="Limpar campo" title="Limpar campo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M5 7l1 13h12l1-13M9 7V4h6v3"/></svg></button></div>
-      <div class="input-meta"><span id="char-count">0 caracteres</span><span class="local-hint"><i></i>Fica neste dispositivo</span></div>
-      <div class="examples"><div class="examples-title"><span>EXEMPLOS FICTÍCIOS</span><span>Toque para testar</span></div><div class="example-buttons"><button class="example-chip" type="button" data-example="123456"><span class="chip-icon weak">!</span><span><b>123456</b><small>Muito previsível</small></span><span class="chip-arrow">↗</span></button><button class="example-chip" type="button" data-example="maria123"><span class="chip-icon medium">~</span><span><b>maria123</b><small>Fácil de adivinhar</small></span><span class="chip-arrow">↗</span></button><button class="example-chip featured" type="button" data-example="Vento!Cacto72Nuvem"><span class="chip-icon strong">✦</span><span><b>Vento!Cacto72Nuvem</b><small>Frase longa e variada</small></span><span class="chip-arrow">↗</span></button></div><p class="fiction-note">ⓘ Estes exemplos são fictícios. Nunca use senhas pessoais nesta demonstração.</p></div>
-      <div class="privacy-box" id="privacy-note"><span class="privacy-icon">🛡️</span><p><b>Sua privacidade está protegida.</b><br>A análise acontece somente no seu navegador. Nada é enviado, salvo ou registrado.</p><span class="privacy-lock">LOCAL</span></div>
-    </article>
-    <article class="panel results-panel" aria-live="polite"><div class="panel-heading"><div><span class="section-kicker">RESULTADO DA ANÁLISE</span><h2>Como está sua senha?</h2></div><span class="step-number">02</span></div>
-      <div class="empty-state" id="empty-state"><div class="empty-ring">?</div><h3>A análise começa com você</h3><p>Digite uma senha de demonstração ou escolha um dos exemplos para ver os critérios.</p></div>
-      <div class="analysis hidden" id="analysis"><div class="score-row"><div><div class="rating-label" id="rating-label">—</div><div class="rating-caption" id="rating-caption">Estimativa educativa</div></div><div class="score-circle" id="score-circle"><strong id="score-value">0</strong><span>/ 100</span></div></div><div class="strength-meter"><span></span><span></span><span></span><span></span><span></span></div><div class="level-labels"><span>Muito fraca</span><span>Muito forte</span></div><div class="criteria"><div class="criteria-heading"><h3>Critérios de segurança</h3><span id="criteria-count">0 de 5</span></div><ul id="criteria-list"></ul></div><div class="explanation"><div class="explain-title">✦ O que podemos aprender?</div><p id="explanation-text"></p></div></div>
-      <div class="estimate-note">ⓘ Esta é uma estimativa educativa, não uma garantia de que a senha não possa ser descoberta.</div>
-    </article>
-  </section>
-  <section class="takeaway"><span class="take-icon">💡</span><div><span class="section-kicker">LEMBRETE RÁPIDO</span><h2>Comprimento e imprevisibilidade fazem a diferença.</h2><p>Uma frase longa com palavras inesperadas pode ser mais fácil de lembrar e mais difícil de adivinhar. Um símbolo sozinho não torna uma senha segura.</p></div></section>
-</main><footer><span>Material educativo · Demonstração universitária</span><span>Feito para aprender. Use exemplos fictícios.</span></footer>
-</body></html>
+
+  <!-- CABEÇALHO -->
+  <header class="topbar">
+
+    <a class="brand" href="#inicio">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3 19 6v5c0 4.8-3 8.2-7 10-4-1.8-7-5.2-7-10V6l7-3Z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      </span>
+
+      <span>
+        Verificador
+        <small>de senhas</small>
+      </span>
+    </a>
+
+    <span class="top-note">
+      <i></i>
+      Análise local e privada
+    </span>
+
+  </header>
 
 
+  <main id="inicio">
+
+    <!-- APRESENTAÇÃO PRINCIPAL -->
+    <section class="hero">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          ✳ LABORATÓRIO DE SEGURANÇA DIGITAL
+        </div>
+
+        <h1>
+          Uma senha forte<br>
+          começa com <span>boas escolhas.</span>
+        </h1>
+
+        <p>
+          Explore como comprimento e previsibilidade influenciam
+          a segurança. Teste exemplos fictícios e descubra o que
+          torna uma senha mais difícil de adivinhar.
+        </p>
+
+        <div class="hero-points">
+          <span><b>01</b> Digite ou escolha um exemplo</span>
+          <span><b>02</b> Veja a análise em tempo real</span>
+        </div>
+
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+
+        <div class="art-orbit"></div>
+
+        <div class="art-lock">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="10" width="16" height="11" rx="2" />
+            <path d="M8 10V7a4 4 0 1 1 8 0v3M12 14v3" />
+          </svg>
+
+          <i>✓</i>
+        </div>
+
+        <span class="float-tag">
+          🔐 Proteja suas contas
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ÁREA PRINCIPAL DA FERRAMENTA -->
+    <section class="workspace" aria-label="Ferramenta de análise">
+
+
+      <!-- PAINEL DE ENTRADA -->
+      <article class="panel input-panel">
+
+        <div class="panel-heading">
+
+          <div>
+            <span class="section-kicker">ÁREA DE TESTE</span>
+            <h2>Experimente uma senha</h2>
+          </div>
+
+          <span class="step-number">01</span>
+
+        </div>
+
+        <p class="panel-intro">
+          Use apenas os exemplos fictícios abaixo durante a apresentação.
+        </p>
+
+
+        <!-- CAMPO DE SENHA -->
+        <label class="field-label" for="password">
+          Sua senha de demonstração
+        </label>
+
+        <div class="password-wrap">
+
+          <span class="field-lock" aria-hidden="true">◈</span>
+
+          <input id="password" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"
+            placeholder="Digite ou selecione um exemplo" aria-describedby="privacy-note">
+
+          <button class="icon-button" id="toggle-visibility" type="button" aria-label="Mostrar senha"
+            title="Mostrar senha">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" />
+              <circle cx="12" cy="12" r="2.6" />
+            </svg>
+          </button>
+
+          <button class="icon-button" id="clear-password" type="button" aria-label="Limpar campo" title="Limpar campo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M10 11v6m4-6v6M5 7l1 13h12l1-13M9 7V4h6v3" />
+            </svg>
+          </button>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES DO CAMPO -->
+        <div class="input-meta">
+
+          <span id="char-count">0 caracteres</span>
+
+          <span class="local-hint">
+            <i></i>
+            Fica neste dispositivo
+          </span>
+
+        </div>
+
+
+        <!-- EXEMPLOS DE SENHAS -->
+        <div class="examples">
+
+          <div class="examples-title">
+            <span>EXEMPLOS FICTÍCIOS</span>
+            <span>Toque para testar</span>
+          </div>
+
+          <div class="example-buttons">
+
+            <button class="example-chip" type="button" data-example="123456">
+              <span class="chip-icon weak">!</span>
+
+              <span>
+                <b>123456</b>
+                <small>Muito previsível</small>
+              </span>
+
+              <span class="chip-arrow">↗</span>
+            </button>
+
+
+            <button class="example-chip" type="button" data-example="maria123">
+              <span class="chip-icon medium">~</span>
+
+              <span>
+                <b>maria123</b>
+                <small>Fácil de adivinhar</small>
+              </span>
+
+              <span class="chip-arrow">↗</span>
+            </button>
+
+
+            <button class="example-chip featured" type="button" data-example="Vento!Cacto72Nuvem">
+              <span class="chip-icon strong">✦</span>
+
+              <span>
+                <b>Vento!Cacto72Nuvem</b>
+                <small>Frase longa e variada</small>
+              </span>
+
+              <span class="chip-arrow">↗</span>
+            </button>
+
+          </div>
+
+          <p class="fiction-note">
+            ⓘ Estes exemplos são fictícios. Nunca use senhas pessoais
+            nesta demonstração.
+          </p>
+
+        </div>
+
+
+        <!-- AVISO DE PRIVACIDADE -->
+        <div class="privacy-box" id="privacy-note">
+
+          <span class="privacy-icon">🛡️</span>
+
+          <p>
+            <b>Sua privacidade está protegida.</b><br>
+            A análise acontece somente no seu navegador.
+            Nada é enviado, salvo ou registrado.
+          </p>
+
+          <span class="privacy-lock">LOCAL</span>
+
+        </div>
+
+      </article>
+
+
+      <!-- PAINEL DE RESULTADOS -->
+      <article class="panel results-panel" aria-live="polite">
+
+        <div class="panel-heading">
+
+          <div>
+            <span class="section-kicker">RESULTADO DA ANÁLISE</span>
+            <h2>Como está sua senha?</h2>
+          </div>
+
+          <span class="step-number">02</span>
+
+        </div>
+
+
+        <!-- ESTADO INICIAL -->
+        <div class="empty-state" id="empty-state">
+
+          <div class="empty-ring">?</div>
+
+          <h3>A análise começa com você</h3>
+
+          <p>
+            Digite uma senha de demonstração ou escolha um dos
+            exemplos para ver os critérios.
+          </p>
+
+        </div>
+
+
+        <!-- RESULTADO DA ANÁLISE -->
+        <div class="analysis hidden" id="analysis">
+
+          <div class="score-row">
+
+            <div>
+              <div class="rating-label" id="rating-label">—</div>
+
+              <div class="rating-caption" id="rating-caption">
+                Estimativa educativa
+              </div>
+            </div>
+
+            <div class="score-circle" id="score-circle">
+
+              <strong id="score-value">0</strong>
+              <span>/ 100</span>
+
+            </div>
+
+          </div>
+
+
+          <!-- INDICADOR DE FORÇA -->
+          <div class="strength-meter">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="level-labels">
+            <span>Muito fraca</span>
+            <span>Muito forte</span>
+          </div>
+
+
+          <!-- CRITÉRIOS DE SEGURANÇA -->
+          <div class="criteria">
+
+            <div class="criteria-heading">
+              <h3>Critérios de segurança</h3>
+              <span id="criteria-count">0 de 5</span>
+            </div>
+
+            <ul id="criteria-list"></ul>
+
+          </div>
+
+
+          <!-- EXPLICAÇÃO DO RESULTADO -->
+          <div class="explanation">
+
+            <div class="explain-title">
+              ✦ O que podemos aprender?
+            </div>
+
+            <p id="explanation-text"></p>
+
+          </div>
+
+        </div>
+
+
+        <!-- AVISO SOBRE A ESTIMATIVA -->
+        <div class="estimate-note">
+          ⓘ Esta é uma estimativa educativa, não uma garantia de
+          que a senha não possa ser descoberta.
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- LEMBRETE EDUCATIVO -->
+    <section class="takeaway">
+
+      <span class="take-icon">💡</span>
+
+      <div>
+
+        <span class="section-kicker">LEMBRETE RÁPIDO</span>
+
+        <h2>
+          Comprimento e imprevisibilidade fazem a diferença.
+        </h2>
+
+        <p>
+          Uma frase longa com palavras inesperadas pode ser mais
+          fácil de lembrar e mais difícil de adivinhar. Um símbolo
+          sozinho não torna uma senha segura.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+  <footer>
+
+    <span>Material educativo · Demonstração universitária</span>
+
+    <span>Feito para aprender. Use exemplos fictícios.</span>
+
+  </footer>
+
+</body>
+
+</html>
